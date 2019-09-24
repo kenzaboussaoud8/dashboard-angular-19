@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+// un commentaire
 export class AppComponent {
   title = 'Football-news';
 
