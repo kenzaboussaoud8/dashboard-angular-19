@@ -19,7 +19,6 @@ export class RegisterComponent {
 
   ) { }
   submitForm() {
-    console.log("Zoubida")
     this.firebaseAuth.SignUp(this.user.login, this.user.password)
   }
   FacebookAuth() {

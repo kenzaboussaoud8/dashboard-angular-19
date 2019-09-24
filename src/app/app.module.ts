@@ -8,7 +8,6 @@ import { rootRouterConfig } from './app.routes';
 import { AppComponent } from './app.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserResolver } from './edit-user/edit-user.resolver';
-import { NewArticleComponent } from './new-article/new-article.component';
 import { HomeComponent } from './home/home.component';
 
 import { AngularFireModule } from '@angular/fire';
@@ -22,15 +21,16 @@ import { MatButtonModule, MatInputModule, MatSliderModule, MatDialogModule } fro
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+import { NewArticleComponent } from './new-article/new-article.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditUserComponent,
-    NewArticleComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NewArticleComponent
   ],
   entryComponents: [],
   imports: [

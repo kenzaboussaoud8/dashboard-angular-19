@@ -3,51 +3,39 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 
+import { ArticleService } from './new-article.service'
+
 @Component({
-  selector: 'app-new-article',
-  templateUrl: './new-article.component.html',
-  styleUrls: ['./new-article.component.scss']
+    selector: 'app-new-article',
+    templateUrl: 'new-article.component.html',
+    styleUrls: ['new-article.component.scss']
 })
-export class NewArticleComponent implements OnInit {
+export class NewArticleComponent {
+    article = {
+        $key: "",
+        title: "",
+        link: "",
+        user: "",
+        date: ""
+    }
+    validation_messages = {
+        'title': [
+            { type: 'required', message: 'Title is required.' }
+        ],
+        'link': [
+            { type: 'required', message: 'Link is required.' }
+        ]
+    };
 
-  exampleForm: FormGroup;
-  avatarLink: string = "";
+    constructor(
+        private articleService: ArticleService
+    ) { }
 
-  validation_messages = {
-    'title': [
-      { type: 'required', message: 'Title is required.' }
-    ],
-    'link': [
-      { type: 'required', message: 'Link is required.' }
-    ]
-  };
+    onSubmit() {
+        // add article
+        console.log('Inserting');
+        // this.articleService.insertArticle(this.article);
 
-  constructor(
-    private fb: FormBuilder,
-    public dialog: MatDialog,
-    private router: Router,
-  ) { }
-
-  ngOnInit() {
-    this.createForm();
-  }
-
-  createForm() {
-    this.exampleForm = this.fb.group({
-      title: ['', Validators.required],
-      link: ['', Validators.required],
-    });
-  }
-
-  resetFields() {
-    this.exampleForm = this.fb.group({
-      title: new FormControl('', Validators.required),
-      link: new FormControl('', Validators.required)
-    });
-  }
-
-  onSubmit(value) {
-    // add article
-  }
+    }
 
 }

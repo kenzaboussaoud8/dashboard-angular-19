@@ -2,44 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { FirebaseAuthService } from '../providers/firebase-auth.service';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({ templateUrl: 'login.component.html' })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
+
+export class LoginComponent {
+
+  user = { login: "", password: "" };
+
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
+    private firebaseAuth: FirebaseAuthService,
+    public afAuth: AngularFireAuth, // Permet d'injecter le service d'authentification firebase
     private router: Router
-  ) {
-    // redirect to home if already logged in
 
+  ) { }
+  login() {
+    console.log("Zoubida")
+    this.afAuth.auth.signInWithEmailAndPassword(this.user.login, this.user.password).then(() => this.router.navigate(['home'])
+    ).catch(() => this.router.navigate(['login']))
   }
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
 
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
-
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    // OK
-  }
 }
