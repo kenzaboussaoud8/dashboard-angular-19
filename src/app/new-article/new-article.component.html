@@ -1,0 +1,40 @@
+<div class="create-page">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Ajouter un article </li>
+    </ol>
+  </nav>
+  <div class="page-content">
+    <div class="row">
+      <div class="col col-md-8">
+
+        <form class="create-form" [formGroup]="exampleForm" novalidate (ngSubmit)="onSubmit(exampleForm.value)">
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Title" class="form-control" formControlName="title">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.title">
+              <mat-error *ngIf="exampleForm.get('title').hasError(validation.type) && (exampleForm.get('title').dirty || exampleForm.get('title').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Link" class="form-control" formControlName="link">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.link">
+              <mat-error *ngIf="exampleForm.get('link').hasError(validation.type) && (exampleForm.get('link').dirty || exampleForm.get('link').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+          <div class="row submit-button-container">
+            <div class="col-md-4">
+              <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!exampleForm.valid">Valider</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
